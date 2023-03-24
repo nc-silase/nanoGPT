@@ -2,7 +2,7 @@ import pandas as pd
 
 column = 'Introduction: Background'
 input_filename = 'cia_world.csv'
-output_filename = '../datasets/dataset_cia_world.txt'
+output_filename = '../datasets/dataset_ciaworld.txt'
 
 
 df = pd.read_csv(input_filename)

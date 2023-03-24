@@ -4,21 +4,30 @@ import tiktoken
 import numpy as np
 import shutil
 
-source = '/path/to/source/folder/file.txt'
-destination = '/path/to/destination/folder/file.txt'
+dataset = 'shakespeare' # ciaworld, edsheeran, haiku, trump
+os_path = os.path.dirname(__file__)
 
-shutil.copyfile(source, destination)
 
-dataset = 'shakespeare' # cia_world, edsheeran, haiku, trump
-# download the tiny shakespeare dataset
-input_file_path = os.path.join(os.path.dirname(__file__), 'input.txt')
+def full_path(relative_pth):
+    return os.path.join(os_path, relative_pth)
+
+# choose dataset
+input_file_path = full_path('input.txt')
 if not os.path.exists(input_file_path):
-
+    output_pth = full_path('input.txt')
     if dataset.lower() == 'shakespeare':
-        shutil.copyfile('../datasets/dataset_shakespeare.txt', 'input.txt')
-    # data_url = 'https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt'
-    # with open(input_file_path, 'w') as f:
-    #     f.write(requests.get(data_url).text)
+        shutil.copyfile(full_path('../../datasets/dataset_shakespeare.txt'), output_pth)
+    elif dataset.lower() == 'ciaworld':
+        shutil.copyfile(full_path('../../datasets/dataset_ciaworld.txt'), output_pth)
+    elif dataset.lower() == 'edsheeran':
+        shutil.copyfile(full_path('../../datasets/dataset_edsheeran.txt'), output_pth)
+    elif dataset.lower() == 'haiku':
+        shutil.copyfile(full_path('../../datasets/dataset_haiku.txt'), output_pth)
+    elif dataset.lower() == 'trump':
+        shutil.copyfile(full_path('../../datasets/dataset_trump.txt'), output_pth)
+    else:
+        print(f'{dataset} does not exist, choose another one')
+
 
 with open(input_file_path, 'r') as f:
     data = f.read()
@@ -30,6 +39,8 @@ val_data = data[int(n*0.9):]
 enc = tiktoken.get_encoding("gpt2")
 train_ids = enc.encode_ordinary(train_data)
 val_ids = enc.encode_ordinary(val_data)
+
+print(f"dataset: {dataset}")
 print(f"train has {len(train_ids):,} tokens")
 print(f"val has {len(val_ids):,} tokens")
 
@@ -41,3 +52,5 @@ val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
 
 # train.bin has 301,966 tokens
 # val.bin has 36,059 tokens
+
+
