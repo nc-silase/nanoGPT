@@ -6,7 +6,7 @@ import shutil
 
 dataset = 'shakespeare' # ciaworld, edsheeran, haiku, trump
 os_path = os.path.dirname(__file__)
-
+base_url = 'https://huggingface.co/silaseic/nanogpt_finetuned_models/resolve/main/datasets'
 
 def full_path(relative_pth):
     return os.path.join(os_path, relative_pth)
@@ -23,15 +23,15 @@ input_file_path = full_path('input.txt')
 if not os.path.exists(input_file_path):
     data_url = ''
     if dataset.lower() == 'shakespeare':
-        data_url = 'https://huggingface.co/silaseic/nanogpt_finetuned_models/resolve/main/datasets/dataset_shakespeare.txt'
+        data_url = f'{base_url}/dataset_shakespeare.txt'
     elif dataset.lower() == 'ciaworld':
-        data_url = 'https://huggingface.co/silaseic/nanogpt_finetuned_models/resolve/main/datasets/dataset_ciaworld.txt'
+        data_url = f'{base_url}/dataset_ciaworld.txt'
     elif dataset.lower() == 'edsheeran':
-        data_url = 'https://huggingface.co/silaseic/nanogpt_finetuned_models/resolve/main/datasets/dataset_edsheeran.txt'
+        data_url = f'{base_url}/dataset_edsheeran.txt'
     elif dataset.lower() == 'haiku':
-        data_url = 'https://huggingface.co/silaseic/nanogpt_finetuned_models/resolve/main/datasets/dataset_haiku.txt'
+        data_url = f'{base_url}/dataset_haiku.txt'
     elif dataset.lower() == 'trump':
-        data_url = 'https://huggingface.co/silaseic/nanogpt_finetuned_models/resolve/main/datasets/dataset_trump.txt'
+        data_url = f'{base_url}/dataset_trump.txt'
     else:
         print(f'{dataset} does not exist, choose another one')
 
