@@ -11,6 +11,13 @@ os_path = os.path.dirname(__file__)
 def full_path(relative_pth):
     return os.path.join(os_path, relative_pth)
 
+#
+# input_file_path = os.path.join(os.path.dirname(__file__), 'input.txt')
+# if not os.path.exists(input_file_path):
+#     data_url = 'https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt'
+#     with open(input_file_path, 'w') as f:
+#         f.write(requests.get(data_url).text)
+
 # choose dataset
 input_file_path = full_path('input.txt')
 if not os.path.exists(input_file_path):
