@@ -21,19 +21,22 @@ def full_path(relative_pth):
 # choose dataset
 input_file_path = full_path('input.txt')
 if not os.path.exists(input_file_path):
-    output_pth = full_path('input.txt')
+    data_url = ''
     if dataset.lower() == 'shakespeare':
-        shutil.copyfile(full_path('../../datasets/dataset_shakespeare.txt'), output_pth)
+        data_url = 'https://huggingface.co/silaseic/nanogpt_finetuned_models/resolve/main/datasets/dataset_shakespeare.txt'
     elif dataset.lower() == 'ciaworld':
-        shutil.copyfile(full_path('../../datasets/dataset_ciaworld.txt'), output_pth)
+        data_url = 'https://huggingface.co/silaseic/nanogpt_finetuned_models/resolve/main/datasets/dataset_ciaworld.txt'
     elif dataset.lower() == 'edsheeran':
-        shutil.copyfile(full_path('../../datasets/dataset_edsheeran.txt'), output_pth)
+        data_url = 'https://huggingface.co/silaseic/nanogpt_finetuned_models/resolve/main/datasets/dataset_edsheeran.txt'
     elif dataset.lower() == 'haiku':
-        shutil.copyfile(full_path('../../datasets/dataset_haiku.txt'), output_pth)
+        data_url = 'https://huggingface.co/silaseic/nanogpt_finetuned_models/resolve/main/datasets/dataset_haiku.txt'
     elif dataset.lower() == 'trump':
-        shutil.copyfile(full_path('../../datasets/dataset_trump.txt'), output_pth)
+        data_url = 'https://huggingface.co/silaseic/nanogpt_finetuned_models/resolve/main/datasets/dataset_trump.txt'
     else:
         print(f'{dataset} does not exist, choose another one')
+
+    with open(input_file_path, 'w') as f:
+        f.write(requests.get(data_url).text)
 
 
 with open(input_file_path, 'r') as f:
